@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+Kamran Yaghoubian, Hunter Antal
+1181581, 
+-->
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SpotOnController">
+   <children>
+      <Text fx:id="highScoreField" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Score: 0" />
+      <Text fx:id="scoreField" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 0" />
+      <Text fx:id="levelField" layoutX="534.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level: 1" />
+   </children>
+</Pane>
