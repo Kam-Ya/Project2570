@@ -14,6 +14,9 @@ public class Spot extends Circle {
         Image image = new Image("Images/green_spot.png");
         ImagePattern pattern = new ImagePattern(image);
         this.setFill(pattern);
+        // added for debugging
+        this.setCenterX(100);
+        this.setCenterY(100);
 
         // Add more initialization code here (e.g., setting start and end points)
     }

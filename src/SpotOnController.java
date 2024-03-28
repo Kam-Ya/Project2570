@@ -40,8 +40,6 @@ public class SpotOnController {
     private void displayTestSpot() {
         //Circle testSpot = new Circle(50, Color.RED); // Just using a Circle for demonstration
     	Spot testSpot = new Spot(50);
-        testSpot.setCenterX(100);
-        testSpot.setCenterY(100);
 
         gamePane.getChildren().add(testSpot); // This will add the test spot to the pane
     }
