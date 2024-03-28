@@ -1,3 +1,27 @@
-SpotOn Game:  
+SpotOn Game Application
+Overview
+The SpotOn Game is designed to test a user's reflexes by requiring them to click on moving spots before they disappear. 
+This game progressively increases in difficulty, with spots moving faster and shrinking as levels advance. 
+Players earn points by clicking on spots, with penalties for missed clicks or letting spots disappear. 
+The game features sound effects for clicks and misses, enhancing the interactive experience.
 
-TODO
+Current Progress
+Game Mechanics: Implemented basic game mechanics, including spot generation, click detection, and scorekeeping.
+Sound Effects: Added sound effects for successful clicks (hits) and misses. The "hit" sound plays when a spot is successfully clicked, and the "miss" sound plays when the game pane is clicked without hitting a spot.
+Score and Level System: Developed a scoring system where points are awarded based on the current level. 
+The game tracks the number of spots clicked and increases the level after every 10 successful clicks.
+High Score Tracking: Integrated high score tracking, saving and loading the high score from a file. 
+This ensures that the high score persists across game sessions.
+UI Elements: Set up basic UI elements to display the current score, high score, and level.
+To-Do
+Spot Movement and Scaling: Implement the logic for spots to move and shrink over time using ParallelTransition, including a ScaleTransition for shrinking and a PathTransition for movement. This will enhance the game's challenge.
+Life System: Introduce a life system where players start with three lives, losing one each time a spot disappears unclicked. Players should gain a life for reaching a new level, up to a maximum of seven lives.
+End Game Logic: Develop the logic to end the game when no lives remain. This should include displaying an alert dialog to the user.
+Enhance User Interface: Improve the user interface for a better player experience. This includes creating a more dynamic and responsive layout, and providing visual feedback for game events (e.g., losing a life, level advancement).
+Additional Sounds: Add more sound effects for specific game events, such as losing a life or the game ending.
+Optimizations and Refinements: Review and optimize the code for efficiency and readability. Ensure the game meets the design and functionality requirements as per the project specifications.
+Notes for Kam
+Kam, I've set up the foundational elements of the SpotOn game, focusing on core gameplay mechanics and user interaction. 
+The application currently supports basic interactions, scorekeeping, and sound effects. 
+The next steps involve enhancing the game dynamics with moving and shrinking spots, refining the user interface, and implementing the life system and end game conditions. 
+Please review the code structure for potential optimizations and consider UI design improvements for a more engaging player experience.
