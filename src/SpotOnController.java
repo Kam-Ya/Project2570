@@ -16,6 +16,9 @@ public class SpotOnController {
 	// Score counter
 	private int highScore = 0;
 	
+	// Number of Spots clicked
+	private int spotsClicked = 0;
+	
 	@FXML
     private Pane gamePane; // Now we can reference the Pane directly
 
@@ -74,6 +77,10 @@ public class SpotOnController {
         highScoreField.setText("High Score: " + highScore); // Update the text field
     }
 
+    public void incrementSpotCounter() {
+    	spotsClicked += 1;
+    	System.out.println(spotsClicked); // error checking
+    }
     
     
     

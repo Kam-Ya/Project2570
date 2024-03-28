@@ -46,6 +46,13 @@ public class Spot extends Circle {
             }
             // Prevent event from bubbling up
             event.consume();
+            
+            // Call the incrementSpotCounter method on the controller
+            if (controller != null) {
+                controller.incrementSpotCounter();
+            }
+            // Prevent event from bubbling up
+            event.consume();
         	
         try {
         	Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
