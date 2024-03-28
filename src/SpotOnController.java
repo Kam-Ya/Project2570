@@ -2,6 +2,8 @@
 // 118151, 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -32,6 +34,7 @@ public class SpotOnController {
     @FXML
     void initialize() {
     	displayTestSpot();
+    	paneClicked();
         assert highScoreField != null : "fx:id=\"highScoreField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
         assert levelField != null : "fx:id=\"levelField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
         assert scoreField != null : "fx:id=\"scoreField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
@@ -44,5 +47,26 @@ public class SpotOnController {
     	System.out.println("Spot Made");
         gamePane.getChildren().add(testSpot); // This will add the test spot to the pane
     }
+    
+    private void paneClicked() {
+        // Play miss sound when pane is clicked but not a spot
+        gamePane.setOnMouseClicked(event -> {
+            // Check if the event target is the pane itself and not a spot or other node
+        	System.out.println("Pane clicked!"); // error checking
+        	
+            if (event.getTarget().equals(gamePane)) {
+                Media missSound = new Media(getClass().getResource("/Sounds/miss.mp3").toExternalForm());
+                MediaPlayer mediaPlayer = new MediaPlayer(missSound);
+                mediaPlayer.play();
+            }
+        });
+    }
+    
 
+    
+    
+    
+    
+    
+    
 }

@@ -33,7 +33,6 @@ public class Spot extends Circle {
         	System.out.println("Spot clicked!"); // error checking
         	
         try {
-        	String soundPath = "Sounds/hit.mp3";
         	Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
             //Media sound = new Media(new File(soundPath).toURI().toString());
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
