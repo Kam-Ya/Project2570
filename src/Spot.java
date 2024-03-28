@@ -9,9 +9,9 @@ import javafx.animation.ScaleTransition;
 import javafx.util.Duration;
 
 public class Spot extends Circle {
-    public Spot(double radius, String imagePath) {
+    public Spot(double radius) {
         super(radius);
-        Image image = new Image(imagePath);
+        Image image = new Image("Images/green_spot.png");
         ImagePattern pattern = new ImagePattern(image);
         this.setFill(pattern);
 
