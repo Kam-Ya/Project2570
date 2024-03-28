@@ -1,8 +1,8 @@
-// Kamran Yaghoubian, Hunter Antal
-// 118151, 
+// Controller for the SpotOn game interface
+// Authors: Kamran Yaghoubian, Hunter Antal
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,116 +13,82 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.paint.Color;
 
 public class SpotOnController {
-	// HighScore counter
-	private int highScore = 0;
-	// Score counter
-	private int score = 0;
-	
-	// Number of Spots clicked
-	private int spotsClicked = 0;
-	
-	// Current Level
-	private int currentLevel = 1;
-	@FXML
-    private Pane gamePane; // Now we can reference the Pane directly
+    // High score, current score, spots clicked, and current level tracking
+    private int highScore = 0;
+    private int score = 0;
+    private int spotsClicked = 0;
+    private int currentLevel = 1;
 
-    @FXML
-    private ResourceBundle resources;
+    @FXML private Pane gamePane;
+    @FXML private Text highScoreField;
+    @FXML private Text levelField;
+    @FXML private Text scoreField;
+    @FXML private ResourceBundle resources;
+    @FXML private URL location;
 
-    @FXML
-    private URL location;
-
-    @FXML
-    private Text highScoreField;
-
-    @FXML
-    private Text levelField;
-
-    @FXML
-    private Text scoreField;
-
+    // Initialize the game setup
     @FXML
     void initialize() {
-    	loadHighScore(); // Load the high score at startup
-    	displayTestSpot();
-    	paneClicked();
-        assert highScoreField != null : "fx:id=\"highScoreField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
-        assert levelField != null : "fx:id=\"levelField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
-        assert scoreField != null : "fx:id=\"scoreField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
+        loadHighScore(); // Load the high score from a file
+        displayTestSpot(); // Display a test spot for interaction
+        paneClicked(); // Set up a listener for missed clicks on the pane
+    }
 
-    }
-    
+    // Display a test spot within the game pane
     private void displayTestSpot() {
-        //Circle testSpot = new Circle(50, Color.RED); // Just using a Circle for demonstration
-    	Spot testSpot = new Spot(50);
-    	
-    	testSpot.setController(this); // Pass the controller reference to the Spot
-        testSpot.SpotClicked(); // Make sure this is called after setting the controller
-        
-    	System.out.println("Spot Made");
-        gamePane.getChildren().add(testSpot); // This will add the test spot to the pane
+        Spot testSpot = new Spot(50); // Create a new spot instance
+        testSpot.setController(this); // Assign this controller to the spot
+        testSpot.SpotClicked(); // Activate the spot's click listener
+        gamePane.getChildren().add(testSpot); // Add the spot to the pane
     }
-    
+
+    // Handle clicks on the game pane that miss any spots
     private void paneClicked() {
-        // Play miss sound when pane is clicked but not a spot
         gamePane.setOnMouseClicked(event -> {
-            // Check if the event target is the pane itself and not a spot or other node
-        	System.out.println("Pane clicked!"); // error checking
-        	
-        	// Decrease score by 15(currentLevel)
-        	decrementScore();
-        	
             if (event.getTarget().equals(gamePane)) {
+                decrementScore(); // Penalize the score for misses
                 Media missSound = new Media(getClass().getResource("/Sounds/miss.mp3").toExternalForm());
-                MediaPlayer mediaPlayer = new MediaPlayer(missSound);
-                mediaPlayer.play();
+                new MediaPlayer(missSound).play(); // Play the miss sound
             }
         });
     }
-    
+
+    // Decrement the score when the pane is clicked but no spots are hit
     private void decrementScore() {
-    	score -= currentLevel*15;
-    	scoreField.setText("Score: " + score); // Update the text field
+        score -= currentLevel * 15;
+        scoreField.setText("Score: " + score);
     }
-    
+
+    // Increment the score when a spot is successfully clicked
     public void incrementScore() {
-    	// The score should be 10(currentLevel)
-        score += currentLevel*10; 
-        scoreField.setText("Score: " + score); // Update the text field
-        
-     // Update high score if necessary
+        score += currentLevel * 10;
+        scoreField.setText("Score: " + score);
         if (score > highScore) {
             highScore = score;
             highScoreField.setText("High Score: " + highScore);
-            saveHighScore(); // Save the new high score
+            saveHighScore(); // Save new high score if necessary
         }
     }
 
+    // Handle logic for when spots are clicked, including level progression
     public void incrementSpotCounter() {
-    	System.out.println(spotsClicked); // error checking
-    	spotsClicked += 1;
-    	
-    	// Every 10 spots counts as a level up
-    	if (spotsClicked >= 10) {
-    		levelIncrease();
-    	}
+        spotsClicked += 1;
+        if (spotsClicked >= 10) {
+            levelIncrease(); // Increase level every 10 successful clicks
+        }
     }
-    
+
+    // Increase the game level and update the UI accordingly
     public void levelIncrease() {
-    		// reset spotsClicked
-    		spotsClicked = 0;
-    		// Increment the level
-    		currentLevel += 1;
-    		// Update level every 10 spots clicked
-    		levelField.setText("Level: "+ currentLevel);
-    	
+        spotsClicked = 0; // Reset spot counter
+        currentLevel += 1;
+        levelField.setText("Level: " + currentLevel);
     }
-    
+
+    // Save the current high score to a file
     public void saveHighScore() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("highscore.txt"))) {
             writer.write(String.valueOf(highScore));
@@ -130,7 +96,8 @@ public class SpotOnController {
             e.printStackTrace();
         }
     }
-    
+
+    // Load the high score from a file at the start of the game
     private void loadHighScore() {
         File highScoreFile = new File("highscore.txt");
         if (highScoreFile.exists()) {
@@ -142,11 +109,4 @@ public class SpotOnController {
             }
         }
     }
-    
-    
-
-
-    
-    
-    
 }

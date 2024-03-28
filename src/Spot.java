@@ -1,70 +1,47 @@
-// Kamran Yaghoubian, Hunter Antal
+// Represents a clickable spot in the SpotOn game
+// Authors: Kamran Yaghoubian, Hunter Antal
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
-import java.io.File;
-import javafx.animation.ParallelTransition;
-import javafx.animation.PathTransition;
-import javafx.animation.ScaleTransition;
-import javafx.util.Duration;
 
 public class Spot extends Circle {
+    private SpotOnController controller; // Controller for score updates
+
     public Spot(double radius) {
         super(radius);
-        Image image = new Image("Images/green_spot.png");
-        ImagePattern pattern = new ImagePattern(image);
-        this.setFill(pattern);
-        // added for debugging
-        this.setCenterX(300);
-        this.setCenterY(300);
-        
-     // Call SpotClicked to setup the click handler
-        SpotClicked();
-
-        // Add more initialization code here (e.g., setting start and end points)
+        setFill(new ImagePattern(new Image("Images/green_spot.png")));
+        setCenterX(300);
+        setCenterY(300);
+        SpotClicked(); // Setup click event handling
     }
 
- // Member used to comunicate score changes
-    private SpotOnController controller;
-
-    // Constructor modification or add a new method to set the controller
+    // Set the controller for this spot
     public void setController(SpotOnController controller) {
         this.controller = controller;
     }
-    
+
+    // Setup click event handling for the spot
     public void SpotClicked() {
-        this.setOnMouseClicked((MouseEvent event) -> {
-            System.out.println("Spot clicked!"); // error checking
-            
-            // Update score and spot counter, then check for level increase
+        setOnMouseClicked(event -> {
             if (controller != null) {
-                controller.incrementScore();
-                controller.incrementSpotCounter();
+                controller.incrementScore(); // Increment score on click
+                controller.incrementSpotCounter(); // Update spot counter
             }
             
-            // Play the hit sound effect
+            // Attempt to play the hit sound effect
             try {
                 Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
+                new MediaPlayer(sound).play();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             
-            // Consume the event to prevent it from propagating
-            event.consume();
+            event.consume(); // Prevent event bubbling
         });
     }
 
-
-    public ParallelTransition createAnimation() {
-        // Create and return a ParallelTransition combining ScaleTransition and PathTransition
-        return new ParallelTransition(this /*, transitions here */);
-    }
-    
-    // Additional methods (e.g., for setting start/end points) go here
 }
