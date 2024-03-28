@@ -74,12 +74,20 @@ public class SpotOnController {
             // Check if the event target is the pane itself and not a spot or other node
         	System.out.println("Pane clicked!"); // error checking
         	
+        	// Decrease score by 15(currentLevel)
+        	decrementScore();
+        	
             if (event.getTarget().equals(gamePane)) {
                 Media missSound = new Media(getClass().getResource("/Sounds/miss.mp3").toExternalForm());
                 MediaPlayer mediaPlayer = new MediaPlayer(missSound);
                 mediaPlayer.play();
             }
         });
+    }
+    
+    private void decrementScore() {
+    	score -= currentLevel*15;
+    	scoreField.setText("Score: " + score); // Update the text field
     }
     
     public void incrementScore() {
