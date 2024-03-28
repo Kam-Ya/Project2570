@@ -38,32 +38,28 @@ public class Spot extends Circle {
     
     public void SpotClicked() {
         this.setOnMouseClicked((MouseEvent event) -> {
-        	System.out.println("Spot clicked!"); // error checking
-        	
-        	// Call the incrementHighScore method on the controller
+            System.out.println("Spot clicked!"); // error checking
+            
+            // Update score and spot counter, then check for level increase
             if (controller != null) {
                 controller.incrementScore();
-            }
-            // Prevent event from bubbling up
-            event.consume();
-            
-            // Call the incrementSpotCounter method on the controller
-            if (controller != null) {
                 controller.incrementSpotCounter();
             }
-            // Prevent event from bubbling up
+            
+            // Play the hit sound effect
+            try {
+                Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            // Consume the event to prevent it from propagating
             event.consume();
-        	
-        try {
-        	Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
-            //Media sound = new Media(new File(soundPath).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
         });
     }
+
 
     public ParallelTransition createAnimation() {
         // Create and return a ParallelTransition combining ScaleTransition and PathTransition

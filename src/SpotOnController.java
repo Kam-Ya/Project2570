@@ -3,7 +3,12 @@
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 public class SpotOnController {
+	// HighScore counter
+	private int highScore = 0;
 	// Score counter
 	private int score = 0;
 	
@@ -41,6 +48,7 @@ public class SpotOnController {
 
     @FXML
     void initialize() {
+    	loadHighScore(); // Load the high score at startup
     	displayTestSpot();
     	paneClicked();
         assert highScoreField != null : "fx:id=\"highScoreField\" was not injected: check your FXML file 'SpotOnController.fxml'.";
@@ -75,8 +83,16 @@ public class SpotOnController {
     }
     
     public void incrementScore() {
-        score += 1; 
+    	// The score should be 10(currentLevel)
+        score += currentLevel*10; 
         scoreField.setText("Score: " + score); // Update the text field
+        
+     // Update high score if necessary
+        if (score > highScore) {
+            highScore = score;
+            highScoreField.setText("High Score: " + highScore);
+            saveHighScore(); // Save the new high score
+        }
     }
 
     public void incrementSpotCounter() {
@@ -99,6 +115,29 @@ public class SpotOnController {
     	
     }
     
+    public void saveHighScore() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("highscore.txt"))) {
+            writer.write(String.valueOf(highScore));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void loadHighScore() {
+        File highScoreFile = new File("highscore.txt");
+        if (highScoreFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(highScoreFile))) {
+                highScore = Integer.parseInt(reader.readLine());
+                highScoreField.setText("High Score: " + highScore);
+            } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
+
+
     
     
     
