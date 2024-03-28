@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 
 public class SpotOnController {
 	// Score counter
-	private int highScore = 0;
+	private int score = 0;
 	
 	// Number of Spots clicked
 	private int spotsClicked = 0;
@@ -74,9 +74,9 @@ public class SpotOnController {
         });
     }
     
-    public void incrementHighScore() {
-        highScore += 1; 
-        highScoreField.setText("High Score: " + highScore); // Update the text field
+    public void incrementScore() {
+        score += 1; 
+        scoreField.setText("Score: " + score); // Update the text field
     }
 
     public void incrementSpotCounter() {

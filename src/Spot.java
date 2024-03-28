@@ -42,7 +42,7 @@ public class Spot extends Circle {
         	
         	// Call the incrementHighScore method on the controller
             if (controller != null) {
-                controller.incrementHighScore();
+                controller.incrementScore();
             }
             // Prevent event from bubbling up
             event.consume();
