@@ -28,9 +28,24 @@ public class Spot extends Circle {
         // Add more initialization code here (e.g., setting start and end points)
     }
 
+ // Member used to comunicate score changes
+    private SpotOnController controller;
+
+    // Constructor modification or add a new method to set the controller
+    public void setController(SpotOnController controller) {
+        this.controller = controller;
+    }
+    
     public void SpotClicked() {
         this.setOnMouseClicked((MouseEvent event) -> {
         	System.out.println("Spot clicked!"); // error checking
+        	
+        	// Call the incrementHighScore method on the controller
+            if (controller != null) {
+                controller.incrementHighScore();
+            }
+            // Prevent event from bubbling up
+            event.consume();
         	
         try {
         	Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());

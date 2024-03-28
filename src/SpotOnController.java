@@ -13,6 +13,9 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 public class SpotOnController {
+	// Score counter
+	private int highScore = 0;
+	
 	@FXML
     private Pane gamePane; // Now we can reference the Pane directly
 
@@ -44,6 +47,10 @@ public class SpotOnController {
     private void displayTestSpot() {
         //Circle testSpot = new Circle(50, Color.RED); // Just using a Circle for demonstration
     	Spot testSpot = new Spot(50);
+    	
+    	testSpot.setController(this); // Pass the controller reference to the Spot
+        testSpot.SpotClicked(); // Make sure this is called after setting the controller
+        
     	System.out.println("Spot Made");
         gamePane.getChildren().add(testSpot); // This will add the test spot to the pane
     }
@@ -62,6 +69,10 @@ public class SpotOnController {
         });
     }
     
+    public void incrementHighScore() {
+        highScore += 1; 
+        highScoreField.setText("High Score: " + highScore); // Update the text field
+    }
 
     
     
