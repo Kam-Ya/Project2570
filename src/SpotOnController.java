@@ -19,6 +19,8 @@ public class SpotOnController {
 	// Number of Spots clicked
 	private int spotsClicked = 0;
 	
+	// Current Level
+	private int currentLevel = 1;
 	@FXML
     private Pane gamePane; // Now we can reference the Pane directly
 
@@ -78,11 +80,24 @@ public class SpotOnController {
     }
 
     public void incrementSpotCounter() {
-    	spotsClicked += 1;
     	System.out.println(spotsClicked); // error checking
+    	spotsClicked += 1;
+    	
+    	// Every 10 spots counts as a level up
+    	if (spotsClicked >= 10) {
+    		levelIncrease();
+    	}
     }
     
-    
+    public void levelIncrease() {
+    		// reset spotsClicked
+    		spotsClicked = 0;
+    		// Increment the level
+    		currentLevel += 1;
+    		// Update level every 10 spots clicked
+    		levelField.setText("Level: "+ currentLevel);
+    	
+    }
     
     
     
