@@ -37,7 +37,6 @@ public class Spot extends Circle {
             Media sound = new Media(new File(soundPath).toURI().toString());
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
-            // Handle spot click here (update score, play sound, etc.)
         } catch (Exception e) {
         	e.printStackTrace();
         }

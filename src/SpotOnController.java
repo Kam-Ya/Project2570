@@ -1,6 +1,7 @@
 // Kamran Yaghoubian, Hunter Antal
 // 118151, 
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
