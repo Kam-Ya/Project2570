@@ -3,6 +3,9 @@
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import java.io.File;
+import java.nio.file.Paths;
+
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -34,8 +37,9 @@ public class Spot extends Circle {
             
             // Attempt to play the hit sound effect
             try {
-                Media sound = new Media(getClass().getResource("/Sounds/hit.mp3").toExternalForm());
-                new MediaPlayer(sound).play();
+                Media sound = new Media(new File("src/Sounds/hit.wav").toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
+                player.play();
             } catch (Exception e) {
                 e.printStackTrace();
             }
