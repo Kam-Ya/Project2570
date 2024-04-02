@@ -3,6 +3,7 @@
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
@@ -17,11 +18,15 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.geometry.Bounds;
 import javafx.event.*;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
 
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -32,6 +37,7 @@ public class SpotOnController {
     private int score = 0;
     private int spotsClicked = 0;
     private int currentLevel = 1;
+    int livesRemaining = 3;
 
     @FXML private Pane gamePane;
     @FXML private Text highScoreField;
@@ -39,10 +45,23 @@ public class SpotOnController {
     @FXML private Text scoreField;
     @FXML private ResourceBundle resources;
     @FXML private URL location;
-
+    @FXML private Circle Life1;
+    @FXML private Circle Life2;
+    @FXML private Circle Life3;
+    
+    
+    Circle[] lives = new Circle[3];
+    
     // Initialize the game setup
     @FXML
     void initialize() {
+    	lives[0] = Life1;
+    	lives[1] = Life2;
+    	lives[2] = Life3;
+    	
+    	for (int i = 0; i < 3; i++) {
+    		lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
+    	}
         loadHighScore(); // Load the high score from a file
         displayTestSpot(); // Display a test spot for interaction
         paneClicked(); // Set up a listener for missed clicks on the pane
@@ -138,6 +157,19 @@ public class SpotOnController {
     	} else {
     		return (rand.nextDouble() * (bound.getMaxY() - bound.getMinY()) + bound.getMinY());
     	}
+    }
+    
+    void loseLife() {
+    	livesRemaining--;
+    	
+    	// ends game
+    	if (livesRemaining == 0) {
+    		Platform.exit(); // totally unsure if this works
+    		return;
+    	}
+    	
+    	// removes life from screen
+    	lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
     }
     
     

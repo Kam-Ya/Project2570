@@ -62,6 +62,7 @@ public class Spot extends Circle {
  // put this in this class as it needs access to genRand
     public void transition() {
     	
+    	// avoids errors
     	if (controller == null) {
     		return;
     	}
@@ -79,8 +80,8 @@ public class Spot extends Circle {
     	parallel.setOnFinished(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent event) {
-    			// TODO lose a life
-    		}
+    			controller.loseLife();
+    		}	
     	});
     }
 
