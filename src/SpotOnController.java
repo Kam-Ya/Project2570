@@ -3,6 +3,9 @@
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,10 +13,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.geometry.Bounds;
+import javafx.event.*;
+
+import javafx.animation.ParallelTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class SpotOnController {
     // High score, current score, spots clicked, and current level tracking
@@ -42,6 +53,7 @@ public class SpotOnController {
         Spot testSpot = new Spot(50); // Create a new spot instance
         testSpot.setController(this); // Assign this controller to the spot
         testSpot.SpotClicked(); // Activate the spot's click listener
+        testSpot.transition();
         gamePane.getChildren().add(testSpot); // Add the spot to the pane
     }
 
@@ -87,6 +99,10 @@ public class SpotOnController {
         currentLevel += 1;
         levelField.setText("Level: " + currentLevel);
     }
+    
+    int getLevel() {
+    	return currentLevel;
+    }
 
     // Save the current high score to a file
     public void saveHighScore() {
@@ -109,4 +125,20 @@ public class SpotOnController {
             }
         }
     }
+    
+    // function to generate random numbers because its easier on my head
+    double genRand(boolean choice) {
+    	// random and bounds made to generate a random number in range of bounds
+    	Random rand = new Random();
+    	Bounds bound = gamePane.getBoundsInLocal();
+    	
+    	// calculated random this way because it allows for negative numbers easier
+    	if (choice = true) {
+    		return (rand.nextDouble() * (bound.getMaxX() - bound.getMinX()) + bound.getMinX());
+    	} else {
+    		return (rand.nextDouble() * (bound.getMaxY() - bound.getMinY()) + bound.getMinY());
+    	}
+    }
+    
+    
 }
