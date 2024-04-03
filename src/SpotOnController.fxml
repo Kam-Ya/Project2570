@@ -9,7 +9,7 @@ Kamran Yaghoubian, Hunter Antal
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SpotOnController">
+<Pane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SpotOnController">
    <children>
       <Text fx:id="highScoreField" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Score: 0" />
       <Text fx:id="scoreField" layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 0" />
@@ -17,5 +17,6 @@ Kamran Yaghoubian, Hunter Antal
       <Circle fx:id="Life1" fill="DODGERBLUE" layoutX="26.0" layoutY="371.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="Life2" fill="DODGERBLUE" layoutX="56.0" layoutY="371.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="Life3" fill="DODGERBLUE" layoutX="86.0" layoutY="371.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Pane fx:id="gamePane" layoutX="13.0" layoutY="50.0" prefHeight="300.0" prefWidth="575.0" />
    </children>
 </Pane>

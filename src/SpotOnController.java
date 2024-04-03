@@ -84,6 +84,9 @@ public class SpotOnController {
                 decrementScore(); // Penalize the score for misses
                 Media missSound = new Media(getClass().getResource("/Sounds/miss.mp3").toExternalForm());
                 new MediaPlayer(missSound).play(); // Play the miss sound
+                
+                // lose a life
+                loseLife();
             }
         });
     }
@@ -154,9 +157,9 @@ public class SpotOnController {
     	
     	// calculated random this way because it allows for negative numbers easier
     	if (choice = true) {
-    		return (rand.nextDouble() * (bound.getMaxX() - bound.getMinX()) + bound.getMinX());
+    		return (rand.nextDouble() * (bound.getMaxX() - 250) + 0);
     	} else {
-    		return (rand.nextDouble() * (bound.getMaxY() - bound.getMinY()) + bound.getMinY());
+    		return (rand.nextDouble() * (bound.getMaxY() - 250) + 0);
     	}
     }
     
@@ -178,13 +181,15 @@ public class SpotOnController {
     	
     	// Initialize path transition
     	Path path = new Path(new MoveTo(genRand(true), genRand(false)), new LineTo(genRand(true), genRand(false)));
-    	PathTransition translate = new PathTransition(Duration.seconds(5), path);
+    	PathTransition translate = new PathTransition(Duration.seconds(6 - (0.33 * getLevel())), path);
 
-    	
-    	ScaleTransition scale = new ScaleTransition(Duration.seconds(5));
+    	// Initialize scale transition
+    	ScaleTransition scale = new ScaleTransition(Duration.seconds(6 - (0.33 * getLevel())));
     	scale.setByX(-0.25);
     	scale.setByY(-0.25);
     	
+    	
+    	// put transitions in a parallel transition and play
     	ParallelTransition parallel = new ParallelTransition(spot, scale, translate);
     	parallel.play();
     	parallel.setOnFinished(new EventHandler<ActionEvent>() {
