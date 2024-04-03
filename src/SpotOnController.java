@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.geometry.Bounds;
 import javafx.event.*;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
 import javafx.scene.paint.Color;
 
 import javafx.animation.ParallelTransition;
@@ -72,8 +73,8 @@ public class SpotOnController {
         Spot testSpot = new Spot(50); // Create a new spot instance
         testSpot.setController(this); // Assign this controller to the spot
         testSpot.SpotClicked(); // Activate the spot's click listener
-        testSpot.transition();
         gamePane.getChildren().add(testSpot); // Add the spot to the pane
+        transition(testSpot);
     }
 
     // Handle clicks on the game pane that miss any spots
@@ -170,6 +171,30 @@ public class SpotOnController {
     	
     	// removes life from screen
     	lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+    }
+    
+    // put this in this class as it needs access to genRand
+    public void transition(Spot spot) {
+    	
+    	// Initialize path transition
+    	Path path = new Path(new MoveTo(genRand(true), genRand(false)), new LineTo(genRand(true), genRand(false)));
+    	PathTransition translate = new PathTransition(Duration.seconds(5), path);
+
+    	
+    	ScaleTransition scale = new ScaleTransition(Duration.seconds(5));
+    	scale.setByX(-0.25);
+    	scale.setByY(-0.25);
+    	
+    	ParallelTransition parallel = new ParallelTransition(spot, scale, translate);
+    	parallel.play();
+    	parallel.setOnFinished(new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent event) {
+    			loseLife();
+    		}	
+    	});
+    	
+//    	translate.play(); 1.5 - (0.05 * getLevel())
     }
     
     

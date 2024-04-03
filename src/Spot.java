@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
@@ -30,7 +31,6 @@ public class Spot extends Circle {
         setCenterX(300);
         setCenterY(300);
         SpotClicked(); // Setup click event handling
-        transition(); // Setup for transitions
     }
 
     // Set the controller for this spot
@@ -57,32 +57,6 @@ public class Spot extends Circle {
             
             event.consume(); // Prevent event bubbling
         });
-    }
-    
- // put this in this class as it needs access to genRand
-    public void transition() {
-    	
-    	// avoids errors
-    	if (controller == null) {
-    		return;
-    	}
-    	
-    	// Initialize path transition
-    	Path path = new Path(new MoveTo(controller.genRand(true), controller.genRand(false)));
-    	PathTransition translate = new PathTransition(Duration.seconds(1.5 - (0.05 * controller.getLevel())), path);
-    	
-    	ScaleTransition scale = new ScaleTransition(Duration.seconds(1.5 - (0.05 * controller.getLevel())));
-    	scale.setByX(-0.25);
-    	scale.setByY(-0.25);
-    	
-    	ParallelTransition parallel = new ParallelTransition(circle, translate, scale);
-    	parallel.play();
-    	parallel.setOnFinished(new EventHandler<ActionEvent>() {
-    		@Override
-    		public void handle(ActionEvent event) {
-    			controller.loseLife();
-    		}	
-    	});
     }
 
 }
