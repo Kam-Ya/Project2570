@@ -32,6 +32,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 public class SpotOnController {
     // High score, current score, spots clicked, and current level tracking
     private int highScore = 0;
@@ -64,18 +70,19 @@ public class SpotOnController {
     		lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
     	}
         loadHighScore(); // Load the high score from a file
-        displayTestSpot(); // Display a test spot for interaction
+        initializeSpots(); // Initialize the spots at game start
+        //displayTestSpot(); // Display a test spot for interaction
         paneClicked(); // Set up a listener for missed clicks on the pane
     }
 
     // Display a test spot within the game pane
-    private void displayTestSpot() {
-        Spot testSpot = new Spot(50); // Create a new spot instance
-        testSpot.setController(this); // Assign this controller to the spot
-        testSpot.SpotClicked(); // Activate the spot's click listener
-        testSpot.transition();
-        gamePane.getChildren().add(testSpot); // Add the spot to the pane
-    }
+//    private void displayTestSpot() {
+//        Spot testSpot = new Spot(50); // Create a new spot instance
+//        testSpot.setController(this); // Assign this controller to the spot
+//        testSpot.SpotClicked(); // Activate the spot's click listener
+//        testSpot.transition();
+//        gamePane.getChildren().add(testSpot); // Add the spot to the pane
+//    }
 
     // Handle clicks on the game pane that miss any spots
     private void paneClicked() {
@@ -174,6 +181,24 @@ public class SpotOnController {
     	
     	// removes life from screen
     	lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+    }
+    
+
+    private void initializeSpots() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> createAndDisplaySpot()));
+        timeline.setCycleCount(5); // Create 5 spots at the start
+        timeline.play();
+//        timeline.setOnFinished(e -> {
+//            // Optional: Perform any actions after the initial spots have been created
+//        });
+    }
+
+    public void createAndDisplaySpot() {
+        Spot spot = new Spot(50); // Adjust the size as needed
+        spot.setController(this);
+        spot.SpotClicked(); // Setup click event
+        spot.transition(); // Start spot animation
+        gamePane.getChildren().add(spot); // Add to the game pane
     }
     
     
