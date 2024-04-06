@@ -73,6 +73,7 @@ public class SpotOnController {
         Spot testSpot = new Spot(50); // Create a new spot instance
         testSpot.setController(this); // Assign this controller to the spot
         testSpot.SpotClicked(); // Activate the spot's click listener
+        testSpot.transition();
         gamePane.getChildren().add(testSpot); // Add the spot to the pane
     }
 
@@ -153,12 +154,12 @@ public class SpotOnController {
     	// random and bounds made to generate a random number in range of bounds
     	Random rand = new Random();
     	Bounds bound = gamePane.getBoundsInLocal();
-    	
     	// calculated random this way because it allows for negative numbers easier
-    	if (choice = true) {
-    		return (rand.nextDouble() * (bound.getMaxX() - 250) + 0);
+    	
+    	if (choice == true) {
+    		return (rand.nextDouble() * bound.getMaxX());
     	} else {
-    		return (rand.nextDouble() * (bound.getMaxY() - 250) + 0);
+    		return (rand.nextDouble() * bound.getMaxY());
     	}
     }
     

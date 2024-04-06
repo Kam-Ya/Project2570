@@ -66,6 +66,8 @@ public class Spot extends Circle {
     
  // put this in this class as it needs access to genRand
     public void transition() {
+    	double rand = controller.genRand(true);
+    	double rand1 = controller.genRand(false);
     	
     	// Initialize path transition
     	Path path = new Path(new MoveTo(controller.genRand(true), controller.genRand(false)), new LineTo(controller.genRand(true), controller.genRand(false)));
