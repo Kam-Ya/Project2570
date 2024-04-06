@@ -201,5 +201,10 @@ public class SpotOnController {
         gamePane.getChildren().add(spot); // Add to the game pane
     }
     
+    public void removeSpot(Spot spot) {
+        Platform.runLater(() -> gamePane.getChildren().remove(spot));
+    }
+
+    
     
 }

@@ -46,7 +46,8 @@ public class Spot extends Circle {
             if (controller != null) {
                 controller.incrementScore(); // Increment score on click
                 controller.incrementSpotCounter(); // Update spot counter
-                controller.createAndDisplaySpot(); // Add this line
+                controller.createAndDisplaySpot(); 
+                controller.removeSpot(this); // Request to remove this spot
             }
             
             // Attempt to play the hit sound effect
