@@ -24,6 +24,8 @@ import javafx.scene.input.MouseEvent;
 public class Spot extends Circle {
     private SpotOnController controller; // Controller for score updates
     @FXML private Circle circle;
+    ParallelTransition parallel;
+    
 
     public Spot(double radius) {
         super(radius);
@@ -51,13 +53,41 @@ public class Spot extends Circle {
                 Media sound = new Media(new File("src/Sounds/hit.wav").toURI().toString());
                 MediaPlayer player = new MediaPlayer(sound);
                 player.play();
+                parallel.stop();
                 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             
+            
             event.consume(); // Prevent event bubbling
         });
+    }
+    
+ // put this in this class as it needs access to genRand
+    public void transition() {
+    	
+    	// Initialize path transition
+    	Path path = new Path(new MoveTo(controller.genRand(true), controller.genRand(false)), new LineTo(controller.genRand(true), controller.genRand(false)));
+    	PathTransition translate = new PathTransition(Duration.seconds(6 - (0.33 * controller.getLevel())), path);
+
+    	// Initialize scale transition
+    	ScaleTransition scale = new ScaleTransition(Duration.seconds(6 - (0.33 * controller.getLevel())));
+    	scale.setByX(-0.25);
+    	scale.setByY(-0.25);
+    	
+    	
+    	// put transitions in a parallel transition and play
+    	parallel = new ParallelTransition(this, scale, translate);
+    	parallel.play();
+    	parallel.setOnFinished(new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent event) {
+    			controller.loseLife();
+    		}	
+    	});
+    	
+//    	translate.play(); 1.5 - (0.05 * getLevel())
     }
 
 }
