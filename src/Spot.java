@@ -87,8 +87,8 @@ public class Spot extends Circle {
     	parallel.setOnFinished(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent event) {
+    			setFill(new ImagePattern(new Image("Images/red_spot.png")));
     			controller.loseLife();
-    			 controller.createAndDisplaySpot(); // Create a new spot
     		}	
     	});
     	
