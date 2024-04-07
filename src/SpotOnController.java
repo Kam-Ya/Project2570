@@ -172,15 +172,19 @@ public class SpotOnController {
     
     void loseLife() {
     	livesRemaining--;
+    	System.out.println(livesRemaining);
+    	
+    	// removes life from screen
+    	lives[livesRemaining].setFill(Color.TRANSPARENT);
     	
     	// ends game
     	if (livesRemaining == 0) {
-    		Platform.exit(); // totally unsure if this works
+    		//Platform.exit(); // totally unsure if this works
     		return;
     	}
     	
-    	// removes life from screen
-    	lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+    	
+    	
     }
     
 
