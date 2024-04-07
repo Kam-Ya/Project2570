@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
@@ -87,7 +88,7 @@ public class Spot extends Circle {
     	parallel.setOnFinished(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent event) {
-    			setFill(new ImagePattern(new Image("Images/red_spot.png")));
+    			setFill(Color.TRANSPARENT);
     			controller.loseLife();
     		}	
     	});
