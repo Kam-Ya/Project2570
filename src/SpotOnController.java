@@ -55,35 +55,23 @@ public class SpotOnController {
     @FXML private Circle Life1;
     @FXML private Circle Life2;
     @FXML private Circle Life3;
+    @FXML private Circle Life4;
+    @FXML private Circle Life5;
+    @FXML private Circle Life6;
+    @FXML private Circle Life7;
     
     
-    Circle[] lives = new Circle[3];
+    Circle[] lives = new Circle[7];
     
     // Initialize the game setup
     @FXML
     void initialize() {
-    	lives[0] = Life1;
-    	lives[1] = Life2;
-    	lives[2] = Life3;
-    	
-    	for (int i = 0; i < 3; i++) {
-    		lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
-    	}
+    	initilizeLives();
         loadHighScore(); // Load the high score from a file
         initializeSpots(); // Initialize the spots at game start
-        //displayTestSpot(); // Display a test spot for interaction
         paneClicked(); // Set up a listener for missed clicks on the pane
     }
-
-    // Display a test spot within the game pane
-//    private void displayTestSpot() {
-//        Spot testSpot = new Spot(50); // Create a new spot instance
-//        testSpot.setController(this); // Assign this controller to the spot
-//        testSpot.SpotClicked(); // Activate the spot's click listener
-//        testSpot.transition();
-//        gamePane.getChildren().add(testSpot); // Add the spot to the pane
-//    }
-
+    
     // Handle clicks on the game pane that miss any spots
     private void paneClicked() {
         gamePane.setOnMouseClicked(event -> {
@@ -128,6 +116,11 @@ public class SpotOnController {
         spotsClicked = 0; // Reset spot counter
         currentLevel += 1;
         levelField.setText("Level: " + currentLevel);
+        // Add 1 life for every level increased S
+        livesRemaining++;
+        // Add 1 life for leveling up (max 7 lives)
+        addLife();
+        
     }
     
     int getLevel() {
@@ -227,6 +220,35 @@ public class SpotOnController {
         Platform.runLater(() -> gamePane.getChildren().remove(spot));
     }
 
+    private void initilizeLives() {
+    	lives[0] = Life1;
+    	lives[1] = Life2;
+    	lives[2] = Life3;
+    	lives[3] = Life4;
+    	lives[4] = Life5;
+    	lives[5] = Life6;
+    	lives[6] = Life7;
+    	
+    	// Start the game with 3 lives
+    	for (int i = 0; i < livesRemaining; i++) {
+    		lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
+    	}
+    	// Rest of lives are transparent 
+    	for (int i = 3; i < 7; i++) {
+    		lives[i].setFill(Color.TRANSPARENT);
+    	}
+    	
+    }
+    
+    public void addLife() {
+    	// Max lives allowed is 7
+    	if (livesRemaining <= 7) {
+    		for (int i = 0; i < livesRemaining; i++) {
+    			lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
+    		}	
+    	}
+    	
+    }
     
     
 }
