@@ -174,17 +174,31 @@ public class SpotOnController {
     	livesRemaining--;
     	System.out.println(livesRemaining);
     	
-    	// removes life from screen
+    	if (livesRemaining >=0) {
+    		// removes life from screen
     	lives[livesRemaining].setFill(Color.TRANSPARENT);
-    	
-    	// ends game
-    	if (livesRemaining == 0) {
-    		//Platform.exit(); // totally unsure if this works
-    		return;
     	}
     	
     	
-    	
+    	// ends game
+    	if (livesRemaining == 0) {
+    		showGameOverDialog();
+    		return;
+    	}
+    	    	
+    }
+    
+    private void showGameOverDialog() {
+        // Ensure dialog is created and shown on the JavaFX Application Thread
+        Platform.runLater(() -> {
+            Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+            gameOverAlert.setTitle("Game Over");
+            gameOverAlert.setHeaderText("Game Over!");
+            gameOverAlert.setContentText("Your score: " + score + "\nHigh score: " + highScore);
+
+            gameOverAlert.setOnHidden(dialogEvent -> Platform.exit()); // Exit application when dialog is closed
+            gameOverAlert.showAndWait();
+        });
     }
     
 
