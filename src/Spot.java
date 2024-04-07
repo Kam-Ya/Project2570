@@ -99,7 +99,13 @@ public class Spot extends Circle {
                     e.printStackTrace();
                 }
     			setFill(Color.TRANSPARENT);
-    			controller.loseLife();
+    			if (controller.getLivesRemaining()> 0) {
+    				controller.loseLife();
+    				System.out.println("Lost life");
+    				System.out.println(controller.getLivesRemaining());
+    				
+    			}
+    			
     			// Add new spot when old one dies
     			controller.createAndDisplaySpot(); 
     		}	

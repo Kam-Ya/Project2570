@@ -170,8 +170,11 @@ public class SpotOnController {
     // Remove a life
     void loseLife() {
         if (livesRemaining > 0) {
-            // Adjust life visibility before decrementing livesRemaining
-            lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+        	if(livesRemaining <= lives.length) {
+        		// Adjust life visibility before decrementing livesRemaining
+                lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+        	}
+            
             livesRemaining--;
             System.out.println(livesRemaining);
         }
@@ -179,6 +182,7 @@ public class SpotOnController {
     	// ends game
     	if (livesRemaining == 0) {
     		showGameOverDialog();
+    		System.out.println("TEST POPUP");
     	}
     	    	
     }
@@ -229,9 +233,9 @@ public class SpotOnController {
     	for (int i = 0; i < livesRemaining; i++) {
     		lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
     	}
-    	// Rest of lives are transparent 
-    	for (int i = 3; i < 7; i++) {
-    		lives[i].setFill(Color.TRANSPARENT);
+  	// Rest of lives are transparent 
+    	for (int i = 3; i <  lives.length; i++) {
+  			lives[i].setFill(Color.TRANSPARENT);
     	}
     	
     }
