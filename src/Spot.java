@@ -88,6 +88,16 @@ public class Spot extends Circle {
     	parallel.setOnFinished(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent event) {
+    			try {
+    				// only play sound if player is still alive
+    				if (controller.getLivesRemaining() > 0) {
+    					Media missSound = new Media(getClass().getResource("/Sounds/disappear.mp3").toExternalForm());
+                        new MediaPlayer(missSound).play(); // Play the miss sound
+    				}
+    				
+    			}catch (Exception e) {
+                    e.printStackTrace();
+                }
     			setFill(Color.TRANSPARENT);
     			controller.loseLife();
     		}	

@@ -133,7 +133,11 @@ public class SpotOnController {
     int getLevel() {
     	return currentLevel;
     }
-
+    
+    int getLivesRemaining()
+    {
+    	return livesRemaining;
+    }
     // Save the current high score to a file
     public void saveHighScore() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("highscore.txt"))) {
