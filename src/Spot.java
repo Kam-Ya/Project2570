@@ -100,6 +100,8 @@ public class Spot extends Circle {
                 }
     			setFill(Color.TRANSPARENT);
     			controller.loseLife();
+    			// Add new spot when old one dies
+    			controller.createAndDisplaySpot(); 
     		}	
     	});
     	

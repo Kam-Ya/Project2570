@@ -169,7 +169,6 @@ public class SpotOnController {
     
     void loseLife() {
     	livesRemaining--;
-    	System.out.println(livesRemaining);
     	
     	if (livesRemaining >=0) {
     		// removes life from screen
@@ -242,7 +241,7 @@ public class SpotOnController {
     
     public void addLife() {
     	// Max lives allowed is 7
-    	if (livesRemaining <= 7) {
+    	if (livesRemaining < lives.length) {
     		for (int i = 0; i < livesRemaining; i++) {
     			lives[i].setFill(new ImagePattern(new Image("Images/green_spot.png")));
     		}	
