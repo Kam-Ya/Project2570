@@ -169,18 +169,16 @@ public class SpotOnController {
     
     // Remove a life
     void loseLife() {
-    	livesRemaining--;
-    	
-    	if (livesRemaining >=0) {
-    		// removes life from screen
-    	lives[livesRemaining].setFill(Color.TRANSPARENT);
-    	}
-    	
+        if (livesRemaining > 0) {
+            // Adjust life visibility before decrementing livesRemaining
+            lives[livesRemaining - 1].setFill(Color.TRANSPARENT);
+            livesRemaining--;
+            System.out.println(livesRemaining);
+        }
     	
     	// ends game
     	if (livesRemaining == 0) {
     		showGameOverDialog();
-    		return;
     	}
     	    	
     }
@@ -192,7 +190,7 @@ public class SpotOnController {
             Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setHeaderText("Game Over!");
-            gameOverAlert.setContentText("Your score: " + score + "\nHigh score: " + highScore);
+            gameOverAlert.setContentText("Your score: " + score + "\nHigh score: " + highScore + "\nLevel: " + currentLevel);
 
             gameOverAlert.setOnHidden(dialogEvent -> Platform.exit()); // Exit application when dialog is closed
             gameOverAlert.showAndWait();
