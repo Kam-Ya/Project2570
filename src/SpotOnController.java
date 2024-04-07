@@ -167,6 +167,7 @@ public class SpotOnController {
     	}
     }
     
+    // Remove a life
     void loseLife() {
     	livesRemaining--;
     	
@@ -184,6 +185,7 @@ public class SpotOnController {
     	    	
     }
     
+    // Show game over alert box
     private void showGameOverDialog() {
         // Ensure dialog is created and shown on the JavaFX Application Thread
         Platform.runLater(() -> {
@@ -197,16 +199,13 @@ public class SpotOnController {
         });
     }
     
-
+    // Initialize a spot
     private void initializeSpots() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> createAndDisplaySpot()));
         timeline.setCycleCount(5); // Create 5 spots at the start
         timeline.play();
-//        timeline.setOnFinished(e -> {
-//            // Optional: Perform any actions after the initial spots have been created
-//        });
     }
-
+    // Add the initialized spot to the pane
     public void createAndDisplaySpot() {
         Spot spot = new Spot(50); // Adjust the size as needed
         spot.setController(this);
@@ -214,11 +213,11 @@ public class SpotOnController {
         spot.transition(); // Start spot animation
         gamePane.getChildren().add(spot); // Add to the game pane
     }
-    
+    // Remove a spot from the pane
     public void removeSpot(Spot spot) {
         Platform.runLater(() -> gamePane.getChildren().remove(spot));
     }
-
+    // Initialize the lives 
     private void initilizeLives() {
     	lives[0] = Life1;
     	lives[1] = Life2;
@@ -238,7 +237,7 @@ public class SpotOnController {
     	}
     	
     }
-    
+    // Add a life for every new level
     public void addLife() {
     	// Max lives allowed is 7
     	if (livesRemaining < lives.length) {

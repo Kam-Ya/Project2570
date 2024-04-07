@@ -105,7 +105,6 @@ public class Spot extends Circle {
     		}	
     	});
     	
-//    	translate.play(); 1.5 - (0.05 * getLevel())
     }
 
 }
