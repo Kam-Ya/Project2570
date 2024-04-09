@@ -117,7 +117,10 @@ public class SpotOnController {
         currentLevel += 1;
         levelField.setText("Level: " + currentLevel);
         // Add 1 life for every level increased S
-        livesRemaining++;
+        if (livesRemaining<=7) {
+        	livesRemaining++;
+        }
+        
         // Add 1 life for leveling up (max 7 lives)
         addLife();
         
