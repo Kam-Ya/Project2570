@@ -1,5 +1,7 @@
 // Represents a clickable spot in the SpotOn game
 // Authors: Kamran Yaghoubian, Hunter Antal
+// 1181581, 1181729
+
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,7 +35,7 @@ public class Spot extends Circle {
         setFill(new ImagePattern(new Image("Images/green_spot.png")));
         setCenterX(300);
         setCenterY(300);
-        SpotClicked(); // Setup click event handling
+        SpotClicked(); // Click event handling
     }
 
     // Set the controller for this spot

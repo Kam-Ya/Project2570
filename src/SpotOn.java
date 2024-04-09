@@ -1,5 +1,7 @@
 // Main class for the SpotOn Game
 // Authors: Kamran Yaghoubian, Hunter Antal
+// 1181581, 1181729
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

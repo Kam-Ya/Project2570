@@ -1,5 +1,6 @@
 // Controller for the SpotOn game interface
 // Authors: Kamran Yaghoubian, Hunter Antal
+// 1181581, 1181729
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -125,11 +126,11 @@ public class SpotOnController {
         addLife();
         
     }
-    
+    // Get the current level
     int getLevel() {
     	return currentLevel;
     }
-    
+    // Get the number of lives remaining
     int getLivesRemaining()
     {
     	return livesRemaining;
