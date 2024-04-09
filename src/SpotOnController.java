@@ -179,13 +179,11 @@ public class SpotOnController {
         	}
             
             livesRemaining--;
-            System.out.println(livesRemaining);
         }
     	
     	// ends game
     	if (livesRemaining == 0) {
     		showGameOverDialog();
-    		System.out.println("TEST POPUP");
     	}
     	    	
     }

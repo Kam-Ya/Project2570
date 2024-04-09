@@ -101,8 +101,6 @@ public class Spot extends Circle {
     			setFill(Color.TRANSPARENT);
     			if (controller.getLivesRemaining()> 0) {
     				controller.loseLife();
-    				System.out.println("Lost life");
-    				System.out.println(controller.getLivesRemaining());
     				
     			}
     			
